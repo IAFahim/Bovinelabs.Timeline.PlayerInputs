@@ -23,7 +23,9 @@
     "BovineLabs.Reaction",
     "BovineLabs.Timeline.PlayerInputs.Data",
     "BovineLabs.Timeline.Data",
-    "BovineLabs.Timeline"
+    "BovineLabs.Timeline.EntityLinks",
+    "BovineLabs.Timeline",
+    "BovineLabs.Timeline.EntityLinks.Data"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

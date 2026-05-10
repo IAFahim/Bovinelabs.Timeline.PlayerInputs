@@ -1,5 +1,7 @@
+using System;
 using BovineLabs.Core.Collections;
 using BovineLabs.Reaction.Data.Conditions;
+using BovineLabs.Reaction.Data.Core;
 using Unity.Entities;
 using Unity.Mathematics;
 
@@ -14,24 +16,31 @@ namespace BovineLabs.Timeline.PlayerInputs.Data
 
     public enum CommandMode : byte
     {
-        None = 0, // Live State 
+        None = 0,
 
-        // Unordered Searches
         Contains = 1,
         Consume = 2,
         FirstConsume = 3,
         LastConsume = 4,
 
-        // Ordered Searches (Progressive index)
         OrderedContains = 16,
         OrderedConsume = 17,
         OrderedFirstConsume = 18,
         OrderedLastConsume = 19,
 
-        // Negative Requirements
         NotContains = 32,
         NotFirst = 33,
         NotLast = 34
+    }
+
+    [Flags]
+    public enum AxisTransformMode : byte
+    {
+        Position = 0,
+        Velocity = 1 << 0, // 1
+
+        KeepLastPosition = 1 << 1, // 2
+        LocalSpace = 1 << 2, // 4
     }
 
     public struct InputState : IComponentData
@@ -121,5 +130,34 @@ namespace BovineLabs.Timeline.PlayerInputs.Data
     public struct BufferClearConfig : IComponentData, IEnableableComponent
     {
         public BitArray256 ActionMask;
+    }
+
+    public struct AxisTransformConfig : IComponentData
+    {
+        public Target ReadRootFrom;
+        public ushort ConsumerLinkKey;
+        public byte ActionId;
+        public float Range;
+        public float3 Plane;
+        public float Smoothing;
+        public float ClampRadius;
+        public AxisTransformMode Mode;
+    }
+    
+    public static class AxisTransformModeExtensions
+    {
+        public static bool IsVelocity(this AxisTransformMode m) => (m & AxisTransformMode.Velocity)!= 0;
+        public static bool KeepLast(this AxisTransformMode m) => (m & AxisTransformMode.KeepLastPosition)!= 0;
+        public static bool IsLocal(this AxisTransformMode m) => (m & AxisTransformMode.LocalSpace)!= 0;
+    }
+
+    public struct AxisTransformState : IComponentData
+    {
+        public float3 Origin;
+        public float2 LastInput;
+        public float3 CurrentPosition;
+        public float3 Velocity;
+        public bool HasInput;
+        public bool Initialized;
     }
 }
