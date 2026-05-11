@@ -23,12 +23,13 @@ namespace BovineLabs.Timeline.PlayerInputs.Authoring
         public Vector3 Plane = Vector3.up;
 
         [Tooltip("Lerp speed toward target position. 0 = instant snap.")]
-        public float Smoothing = 0f;
+        public float Smoothing;
 
         [Tooltip("Max distance from origin target can move. 0 = unlimited.")]
-        public float ClampRadius = 0f;
+        public float ClampRadius;
 
-        [Tooltip("Position sets target directly. Velocity accumulates. LocalSpace rotates basis by Target. CameraRelative rotates basis by CameraMain.")]
+        [Tooltip(
+            "Position sets target directly. Velocity accumulates. LocalSpace rotates basis by Target. CameraRelative rotates basis by CameraMain.")]
         public AxisTransformMode Mode = AxisTransformMode.Position;
 
         public override double duration => 1;

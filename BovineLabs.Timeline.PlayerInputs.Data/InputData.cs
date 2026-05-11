@@ -42,7 +42,7 @@ namespace BovineLabs.Timeline.PlayerInputs.Data
         LocalSpace = 1 << 2,
         CameraRelative = 1 << 3
     }
-    
+
     public struct InputState : IComponentData
     {
         public BitArray256 Down;
@@ -146,10 +146,25 @@ namespace BovineLabs.Timeline.PlayerInputs.Data
 
     public static class AxisTransformModeExtensions
     {
-        public static bool IsVelocity(this AxisTransformMode m) => (m & AxisTransformMode.Velocity) != 0;
-        public static bool KeepLast(this AxisTransformMode m) => (m & AxisTransformMode.KeepLastPosition) != 0;
-        public static bool IsLocal(this AxisTransformMode m) => (m & AxisTransformMode.LocalSpace) != 0;
-        public static bool IsCameraRelative(this AxisTransformMode m) => (m & AxisTransformMode.CameraRelative) != 0;
+        public static bool IsVelocity(this AxisTransformMode m)
+        {
+            return (m & AxisTransformMode.Velocity) != 0;
+        }
+
+        public static bool KeepLast(this AxisTransformMode m)
+        {
+            return (m & AxisTransformMode.KeepLastPosition) != 0;
+        }
+
+        public static bool IsLocal(this AxisTransformMode m)
+        {
+            return (m & AxisTransformMode.LocalSpace) != 0;
+        }
+
+        public static bool IsCameraRelative(this AxisTransformMode m)
+        {
+            return (m & AxisTransformMode.CameraRelative) != 0;
+        }
     }
 
     public struct AxisTransformState : IComponentData

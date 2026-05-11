@@ -36,7 +36,7 @@ namespace BovineLabs.Timeline.PlayerInputs
             _sources = state.GetUnsafeComponentLookup<EntityLinkSource>(true);
             _entries = state.GetUnsafeBufferLookup<EntityLinkEntry>(true);
             _axes = state.GetBufferLookup<InputAxis>(true);
-            _transforms = state.GetComponentLookup<LocalTransform>(false);
+            _transforms = state.GetComponentLookup<LocalTransform>();
             _cameraQuery = SystemAPI.QueryBuilder().WithAll<CameraMain, LocalToWorld>().Build();
         }
 
@@ -93,8 +93,7 @@ namespace BovineLabs.Timeline.PlayerInputs
             [ReadOnly] public UnsafeBufferLookup<EntityLinkEntry> Entries;
             [ReadOnly] public BufferLookup<InputAxis> Axes;
 
-            [NativeDisableParallelForRestriction]
-            public ComponentLookup<LocalTransform> Transforms;
+            [NativeDisableParallelForRestriction] public ComponentLookup<LocalTransform> Transforms;
 
             public float DeltaTime;
             public quaternion CameraRotation;
@@ -106,8 +105,8 @@ namespace BovineLabs.Timeline.PlayerInputs
                 if (!TargetsLookup.TryGetComponent(targetEntity, out var targets)) return;
 
                 if (!EntityLinkResolver.TryResolve(
-                    targetEntity, targets, config.ReadRootFrom, config.ConsumerLinkKey,
-                    TargetsCustoms, Sources, Entries, out var consumer)) return;
+                        targetEntity, targets, config.ReadRootFrom, config.ConsumerLinkKey,
+                        TargetsCustoms, Sources, Entries, out var consumer)) return;
 
                 if (!Axes.TryGetBuffer(consumer, out var axesBuf)) return;
 
@@ -204,7 +203,7 @@ namespace BovineLabs.Timeline.PlayerInputs
                     var offset = state.CurrentPosition - state.Origin;
                     var distSq = math.lengthsq(offset);
                     if (distSq > config.ClampRadius * config.ClampRadius)
-                        state.CurrentPosition = state.Origin + (offset / math.sqrt(distSq)) * config.ClampRadius;
+                        state.CurrentPosition = state.Origin + offset / math.sqrt(distSq) * config.ClampRadius;
                 }
 
                 transform.Position = state.CurrentPosition;

@@ -162,7 +162,8 @@ namespace BovineLabs.Timeline.PlayerInputs
                 ProcessULong(upFiltered.Data4, 192, InputPhase.Up, ref history, Tick);
             }
 
-            private static void ProcessULong(ulong data, byte offset, InputPhase phase, ref DynamicBuffer<InputHistory> history, uint tick)
+            private static void ProcessULong(ulong data, byte offset, InputPhase phase,
+                ref DynamicBuffer<InputHistory> history, uint tick)
             {
                 while (data != 0)
                 {

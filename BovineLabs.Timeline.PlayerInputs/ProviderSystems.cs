@@ -16,8 +16,8 @@ namespace BovineLabs.Timeline.PlayerInputs
             {
                 if (bridge.Value == null) continue;
 
-                state.ValueRW = new InputState 
-                { 
+                state.ValueRW = new InputState
+                {
                     Down = bridge.Value.CurrentDown,
                     Held = bridge.Value.CurrentHeld,
                     Up = bridge.Value.CurrentUp

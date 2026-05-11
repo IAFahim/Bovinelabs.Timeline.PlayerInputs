@@ -32,7 +32,7 @@ namespace BovineLabs.Timeline.PlayerInputs.Data
             CurrentDown = default;
             CurrentHeld = default;
             CurrentUp = default;
-            
+
             foreach (var btn in buttons)
             {
                 if (btn.Action.WasPressedThisFrame()) CurrentDown[btn.Id] = true;

@@ -104,7 +104,8 @@ namespace BovineLabs.Timeline.PlayerInputs
                     {
                         for (var i = 0; i < history.Length; i++)
                         {
-                            if (consumeMask[i] || history[i].ActionId != step.ActionId || history[i].Phase != step.Phase) continue;
+                            if (consumeMask[i] || history[i].ActionId != step.ActionId ||
+                                history[i].Phase != step.Phase) continue;
                             if (step.Mode == CommandMode.Consume) consumeMask[i] = true;
                             return true;
                         }
@@ -143,7 +144,8 @@ namespace BovineLabs.Timeline.PlayerInputs
                     {
                         for (var i = searchIndex; i < history.Length; i++)
                         {
-                            if (consumeMask[i] || history[i].ActionId != step.ActionId || history[i].Phase != step.Phase) continue;
+                            if (consumeMask[i] || history[i].ActionId != step.ActionId ||
+                                history[i].Phase != step.Phase) continue;
                             if (step.Mode == CommandMode.OrderedConsume) consumeMask[i] = true;
                             searchIndex = i + 1;
                             return true;
