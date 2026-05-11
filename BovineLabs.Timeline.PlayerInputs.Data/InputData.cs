@@ -42,11 +42,7 @@ namespace BovineLabs.Timeline.PlayerInputs.Data
         LocalSpace = 1 << 2,
         CameraRelative = 1 << 3
     }
-
-    public struct CameraMain : IComponentData
-    {
-    }
-
+    
     public struct InputState : IComponentData
     {
         public BitArray256 Down;

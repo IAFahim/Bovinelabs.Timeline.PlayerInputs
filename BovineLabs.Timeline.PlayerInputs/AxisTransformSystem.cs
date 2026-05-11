@@ -1,3 +1,4 @@
+using BovineLabs.Bridge.Data.Camera;
 using BovineLabs.Core.Extensions;
 using BovineLabs.Core.Iterators;
 using BovineLabs.Reaction.Data.Core;
@@ -15,6 +16,7 @@ namespace BovineLabs.Timeline.PlayerInputs
 {
     [UpdateInGroup(typeof(TimelineComponentAnimationGroup))]
     [UpdateAfter(typeof(ConsumerSyncSystem))]
+    [WorldSystemFilter(WorldSystemFilterFlags.LocalSimulation)]
     public partial struct AxisTransformSystem : ISystem
     {
         private ComponentLookup<Targets> _targetsLookup;
